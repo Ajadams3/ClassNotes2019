@@ -31,4 +31,17 @@ Lock-> when we make Object A Not available
 	Lock Granularity-> how big of a lock must we do?
 		1)The field
 		2)The Record
-		3)THe block or page ] Most common
+		3)The block or page ] Most common
+		4)Whole file or DB
+		
+Locking Scheme
+	Share Lock-> other transactions can read our info
+	Exclusive lock-> No one else can access
+	
+Lock Duration-> some sort of timing for a lock
+
+DeadLock-> When a transaction has a Lock on A, another needs it to continue their work. Perhaps they have a lock on B, and 1st one is waiting on it.
+
+Timestamp-> could be an time d date, but could just be a number.
+
+ 
