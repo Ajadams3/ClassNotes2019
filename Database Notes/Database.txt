@@ -44,4 +44,11 @@ DeadLock-> When a transaction has a Lock on A, another needs it to continue thei
 
 Timestamp-> could be an time d date, but could just be a number.
 
- 
+Locking Protocol-> a set of rules for locking objects to prevent anomolies.
+
+Types of anomolies
+A) Write Read (WR) Conflict-> where 1 transaction reads data modified by another transaction which has not commited -> Dirty Read
+
+B) Read Write(RW) conflict-> one transaction has read an object; another transaction concurrently writes the object. WHen the First transactions reads the object again, the data is different.
+
+WW Conflict -> When 2 transactions read the record and each write it back. Both are based on original data; DB will be incorrect.
