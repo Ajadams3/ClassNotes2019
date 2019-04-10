@@ -26,3 +26,9 @@ S(A) -> request a shared lock on object A
 X(A) -> request an exclusive lock on A
 
 The end of each "Abort" or "commit"
+
+Lock-> when we make Object A Not available
+	Lock Granularity-> how big of a lock must we do?
+		1)The field
+		2)The Record
+		3)THe block or page ] Most common
