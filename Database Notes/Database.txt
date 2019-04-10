@@ -1,0 +1,28 @@
+Transaction -> A series of action to perform a specific task
+
+R(old bal 1st acct)
+w(newbie 1st acct)
+R(old bal 2nd acct)
+w(new bal 2nd acct)
+To transfer monry from one to another
+
+Transactsions must have the following characteristics
+
+A) Atomic-> it appears to the user to be a simple task which either all completed or not done at all
+
+B) Consistency -> the transaction must leave the DB in a "consistent" (correct given our intentions) state.
+
+C) Isolation -> to the user, each transation is seperate entity not affected by other users transactions
+
+D) Durable -> if the system crases, the transactions must still be on the system.
+
+E) Transaction Sechedule -> is the list of actions for a transaction. It can show many transactions concurrently progress. Allows DBMS to be aware and to manage concurrency issue.
+
+Let A = an Object
+
+R(A) -> read A
+w(A) -> write A
+S(A) -> request a shared lock on object A
+X(A) -> request an exclusive lock on A
+
+The end of each "Abort" or "commit"
