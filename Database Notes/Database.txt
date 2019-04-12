@@ -52,3 +52,52 @@ A) Write Read (WR) Conflict-> where 1 transaction reads data modified by another
 B) Read Write(RW) conflict-> one transaction has read an object; another transaction concurrently writes the object. WHen the First transactions reads the object again, the data is different.
 
 WW Conflict -> When 2 transactions read the record and each write it back. Both are based on original data; DB will be incorrect.
+
+Lock Management:
+Lock manager manages a lock able(a hash table with the objects identifier as its key) + will contain info about the locks
+
+#of transactions holding a lock on an object
+-the type of lock(SorX)
+-a pointer to a Q of lock requests
+
+When a lock is requested, the LM goes to the table to look for that object.
+If it is not in the table, it is entered into the table and appropriate information is added. -> Lock Granted
+
+-If it has a shared lock on it and a shared lock is requested, it checks the Q to see if any other request is in there for htis object.
+-> If the Q does not have another request, shared lock is granted.
+-> if there is some other lock request in the Q, the first must be an exclusive lock request.-> Preventing this request from starving -> unlikely to be fulfilled in a reasonable time. SO EnQ this lock request
+If an exclusive lock is requested - if the object is currently locked, we EnQ this request - wait until the locks are released
+If a shared lock needs to be upgraded 
+	-if no other transaction is sharing the lock, the upgrade is granted.
+If another is sharing it, this exclusive lock is pushed - put into the first position in the Q.
+
+Strict 2PL
+
+2 Phase Locking Protocol
+-----------------------------
+	for a transaction, 2 phases:
+		Growing Phase-> All lock requests are granted and held until we get commit or abort
+		Shrinking Phase-> When all locks are released upon commit or abort
+		"Non-strict" - Some locks will be released before commit/abort
+		once 1 lock is released, it can't ask for another lock
+=============================
+Lock Performance
+Thrashing-> when we have lots of transactions active, system may block new transactions as the chances of them blocking each other grows.
+
+Some Answers:
+	1) Have a max# of transactions allowed at any given time
+	2)Use a lower level of lcoking procedure granularity
+	3)Reduce time allowed for blocks
+	4) Speed up transactions -> reqrite queries to be more efficient.
+	5) Could be handled by programming
+	6) Copy some to another loaction to another site and do work there
+	
+Methods of Handling deadlock
+	1) Deadlock Prevention-> use a timestamp that keeps track of the order of transactions beginning on system.
+		A) IF T2 requests a lock while T1 holds the lock then:
+			i)wait-die: If T2 has a higher priority, it is allowed to wait, otherwise its aborted(t2 is the victim).
+			ii)wound-die: If T2 has a higher priority, T1 is aborted, otherwise T2 waits (T1 is the victim).
+			
+	2) Deadlock detection - idea is that deadlocks are actually quite rare, so we create a "waits-for" graph is maintained and used to detect cycles.
+		Transactions are nodes on the graph, arcs between nodes shows one is waiting for hte other. T1T2 means T1 is waiting for T2.Lock Manager adds arcs as requests are made and deletes them when the lock request is granted.
+		
