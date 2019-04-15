@@ -101,3 +101,31 @@ Methods of Handling deadlock
 	2) Deadlock detection - idea is that deadlocks are actually quite rare, so we create a "waits-for" graph is maintained and used to detect cycles.
 		Transactions are nodes on the graph, arcs between nodes shows one is waiting for hte other. T1T2 means T1 is waiting for T2.Lock Manager adds arcs as requests are made and deletes them when the lock request is granted.
 		
+Recovery Services
+	Still maintain->A - Atomic
+			C - Consistency
+			I - Isolation
+			D - Durability
+	A) Backup or Saved copy - the DB at a specific point of time
+	B)Journaling - The Dbms keeps a transaction log which has every record changed before and after. Has a Start and finished with an Abort or commit) Write Ahead log - WAL
+		
+	C) Forward Recovery -> Copy Backup File to replace the Damaged DB, then the DBMS goes through and does each action from the log in order until it reaches the point where it crashed. Any transation not commited or Aborted is backed out using the log. Sometimes, many changes might have to the same record. Some systems will sort the log and just do the last modification.
+	D) Backward Recovery - In a case where only some transaction caused the problem - only update the system appropriatedly (ie undo uncommited transactions)
+	
+	E) Differential Files - All changes to the DB are stored in a different file, often on a permanent disk somewhere else) and all updates are actually there. (generally faster unless there are many, many transactions. THis file is used for all later requests and only if not found is actual DB used.
+	F) Check Point -> Every so often(every 15 min or 1 hour) the system flushes changes to the actual DB THe entire system freezes while it updates. 
+	G) If all else fails we back out of each transaction manually.
+	
+===============================================
+
+Aries - 3 Phrase recovery
+------------------------
+Algorithm
+Analysis - THe DB identifies the last correct point and active and dirty transaction
+Redo - Redoes all that were commited
+undo - undoes those that were not commited
+
+Store data in our files:
+1)sorted by key field(s)
+2) Heap Files -> any old in which it comes from
+3) Hashed files
