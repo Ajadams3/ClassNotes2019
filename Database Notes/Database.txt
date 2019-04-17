@@ -129,3 +129,36 @@ Store data in our files:
 1)sorted by key field(s)
 2) Heap Files -> any old in which it comes from
 3) Hashed files
+
+Heap File -> data put in no particular order
+Sorted file -> ordered by key fields
+Hached file -> data is located by using a hash) puts them in a specific bucket
+
+Cost Model
+C- Average time to process a record generally a field comparison
+H- THe time to use the hash formula
+Notation:
+B = # of data pages
+R = # of records per page
+D = Average time to read/write a page(to/from disk)
+Operations to compare
+
+Scan-> fetch all records in a file
+Search with equality->fetch all records which satisfy an "=" criteria
+Search with range selection
+
+Heap File
+------------------------------
+Scan->every page will be read
+	Cost = B(D+RC)
+Search with equality Selection
+	COst = 1/2(B(D+RC)
+Search with Not a key field
+	Cost = B(D+RC)
+Search with Range slection -> essentially a scan
+	Cost = B(D+RC)
+
+Insert
+2B+C
+Delete
+Cost = Search + C + D
