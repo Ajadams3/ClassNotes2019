@@ -162,3 +162,20 @@ Insert
 2B+C
 Delete
 Cost = Search + C + D
+
+Embedded SQL-> when SQL statements are enacted inside a programming language.
+
+host-variables + working-variable
+	Language variable to store field from the record
+	
+When we have multiple records resulting from a query, we have to handle this differently
+
+OPEN-> executes the query and brings the resulting records into memory for us to work on.
+FETCH-> Brings the values from the query into the host variables
+CLOSE-> Essentially deletes result of query
+cursour-> essentially a pointer to a record ub our group of records
+
+Advantages pf using cursours:
+A) Coding is greatly simplified
+B)System optimizer determines the best way to execute the query
+C) If the DB structure changes, but info you need is still obtainable only the cursour declaration needs to change. 
