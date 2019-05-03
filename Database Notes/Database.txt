@@ -197,3 +197,8 @@ File Storage technologies		Including Derivable Data
 					Denormalization
 					Splitting Relations
 					
+Embedded SQL
+-----------------------------
+Trigger
+<-->
+keeps track of events
