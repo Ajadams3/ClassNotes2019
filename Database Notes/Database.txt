@@ -102,12 +102,12 @@ Methods of Handling deadlock
 		Transactions are nodes on the graph, arcs between nodes shows one is waiting for hte other. T1T2 means T1 is waiting for T2.Lock Manager adds arcs as requests are made and deletes them when the lock request is granted.
 		
 Recovery Services
-	Still maintain->A - Atomic
-			C - Consistency
-			I - Isolation
-			D - Durability
+	Still maintain->A - Atomic -> treated as one job -> commit or abort
+			C - Consistency -> database has to agree with what it is
+			I - Isolation -> user not aware if they are waiting for someone else
+			D - Durability 
 	A) Backup or Saved copy - the DB at a specific point of time
-	B)Journaling - The Dbms keeps a transaction log which has every record changed before and after. Has a Start and finished with an Abort or commit) Write Ahead log - WAL
+	B)Journaling - The DBMS keeps a transaction log which has every record changed before and after. Has a Start and finished with an Abort or commit) Write Ahead log - WAL
 		
 	C) Forward Recovery -> Copy Backup File to replace the Damaged DB, then the DBMS goes through and does each action from the log in order until it reaches the point where it crashed. Any transation not commited or Aborted is backed out using the log. Sometimes, many changes might have to the same record. Some systems will sort the log and just do the last modification.
 	D) Backward Recovery - In a case where only some transaction caused the problem - only update the system appropriatedly (ie undo uncommited transactions)
@@ -178,4 +178,22 @@ cursour-> essentially a pointer to a record ub our group of records
 Advantages pf using cursours:
 A) Coding is greatly simplified
 B)System optimizer determines the best way to execute the query
-C) If the DB structure changes, but info you need is still obtainable only the cursour declaration needs to change. 
+C) If the DB structure changes, but info you need is still obtainable only the cursour declaration needs to change.
+
+Test 3
+-------------
+QBE- Relational Calculus
+	DRC + TRC
+Transactions -> Dirty Read 
+		Unrepeatable read
+Concurrency -> data structures -> 2 dim table objects/types of locks s,x	
+		-> Timestamping
+Locks -> Exclusive lock / shared lock / deadlock / wait-die / wound-die
+Crash Recovery
+----------------------------
+Improvements				Indexes
+<-->					<-->
+File Storage technologies		Including Derivable Data
+					Denormalization
+					Splitting Relations
+					
